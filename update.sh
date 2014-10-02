@@ -19,10 +19,15 @@ yum install -y vim
 yum install -y --enablerepo=epel ansible
 yum install -y sshpass
 
-mkdir -p /.cache/ansible
-mv /etc/ansible /etc/ansible_default
-ln -s /.cache/ansible/ /etc/ansible
-
+mkdir -p /var/dvolume
+cd /var/dvolume && git clone https://github.com/naoya-ogawa/ansible_docker.git
+cd /etc/ansible && rm -f hosts && rm -f ansible.cfg
+ln -s /var/dvolume/ansible_docker/ansiblefiles/hosts/hosts hosts
+ln -s /var/dvolume/ansible_docker/ansiblefiles/hosts/ansible.cfg ansible.cfg
+#mkdir -p /.cache/ansible
+#mv /etc/ansible /etc/ansible_default
+#ln -s /.cache/ansible/ /etc/ansible
+#
 cd /var/ && git clone https://github.com/naoya-ogawa/ide.git
 cd / &&  ln -s /var/ide/_vimrc .vimrc 
 
